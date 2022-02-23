@@ -50,7 +50,7 @@ void gonext(int *cursor1, int *cursor2, bool *sendfull);
 
 int rowr = 1;
 int cursor1 = MAX_ROW_R + 1, cursor2 = 0;
-bool sendfull = false, receivefull = false;
+bool sendfull = 0, receivefull = 0;
 
 int main()
 {

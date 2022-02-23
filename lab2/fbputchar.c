@@ -116,13 +116,13 @@ int fbputswrap(const char *s, int row, int col, int maxrow, int maxcol)
   char c;
   int roww = row; int colw = col;
 
-  while (((c = *s++) != 0) && (row < maxrow))
+  while (((c = *s++) != 0) && (roww < maxrow))
   {
-    while (col < maxcol) fbputchar(c, row, col++)
-    row++;
+    while (col < maxcol) fbputchar(c, roww, col++)
+    roww++;
   }
   
-  return row;
+  return roww;
 }
 /* 8 X 16 console font from /lib/kbd/consolefonts/lat0-16.psfu.gz
 

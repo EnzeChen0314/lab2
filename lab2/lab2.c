@@ -102,19 +102,25 @@ int main()
 
   /* Look for and handle keypresses */
   for (;;) {
-    libusb_interrupt_transfer(keyboard, endpoint_address,
-			      (unsigned char *) &packet, sizeof(packet),
-			      &transferred, 0);
+    libusb_interrupt_transfer(keyboard, endpoint_address, (unsigned char *) &packet, sizeof(packet), &transferred, 0);
     if (transferred == sizeof(packet)) {
       sprintf(keystate, "%02x %02x %02x", packet.modifiers, packet.keycode[0], packet.keycode[1]);
       printf("%s\n", keystate);
-			if (!sendfull) {
-				cursor1 = fbputswrap(keystate, cursor1, cursor2, MAX_ROW_S, MAX_COL);
-				gonext();
-			}
+      char send0, send1;
+      send0 = keystateconvert1(packet.modifiers, packet.keycode[0]);
+      send1 = keystateconvert2(packet.keycode[1]);
+      
+      if (!sendfull) {
+	fbputchar(send0, cursor1, cursor2);
+	gonext();
+	if (int(cursor2) != 177 || int(cursor2) != 178) {
+	  fbputchar(send0, cursor1, cursor2);
+	  gonext();
+	}	
+      }
       if (packet.keycode[0] == 0x29) { /* ESC pressed? */
-				break;
-			}
+	break;
+      }
     }
   }
 
@@ -137,15 +143,16 @@ void *network_thread_f(void *ignore)
   while ( (n = read(sockfd, &recvBuf, BUFFER_SIZE - 1)) > 0 ) {
     recvBuf[n] = '\0';
     printf("%s", recvBuf);
-		if (!receivefull) {
-			if (rows == MAX_ROW_R) receivefull = true;
-		}	
-		else {
-			memRclear();
-			rows = 1;
-		}
-		rows = fbputswrap(recvBuf, rows, 0, MAX_ROW_R, MAX_COL);
-		rows++;
+    if (!receivefull) {
+      if (rows == MAX_ROW_R - 1) receivefull = true;
+    }	
+    else {
+      memRclear();
+      receivefull = true;
+      rows = 1;
+    }
+    rows = fbputswrap(recvBuf, rows, 0, MAX_ROW_R, MAX_COL);
+    rows++;
   }
 
   return NULL;
@@ -182,14 +189,14 @@ void memSclear()
 
 void gonext()
 {
-	if (!sendfull) {
-		if (cursor2 == MAX_COL) {
-			if (cursor1 == MAX_ROW_S - 1) sendfull = true;
-			else {
-				cursor1++;
-				cursor2 = 0;
-			}
-		}
-		else cursor2++;
-	}
+  if (!sendfull) {
+    if (cursor2 == MAX_COL) {
+      if (cursor1 == MAX_ROW_S - 1) sendfull = true;
+      else {
+        cursor1++;
+        cursor2 = 0;
+      }
+    }
+    else cursor2++;
+  }
 }

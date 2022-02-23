@@ -113,16 +113,18 @@ void fbputs(const char *s, int row, int col)
 // fbputs considering line wrap
 int fbputswrap(const char *s, int row, int col, int maxrow, int maxcol)
 {
-  char c;
+  char c = *s;
   int roww = row, colw = col;
 
-  while (((c = *s++) != 0) && (roww < maxrow))
+  while ((c != 0) && (roww < maxrow))
   {
-    while (colw < maxcol) fbputchar(c, roww, colw++);
+    while (colw < maxcol) {
+      fbputchar(c, roww, colw++);
+      s++;
+    }
     
     roww++;
     colw = 0;
-    fbputchar(c, roww, colw++);
   }
   
   return roww;

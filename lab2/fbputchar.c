@@ -70,7 +70,7 @@ void fbputchar(char c, int row, int col)
     pixel = left;
     mask = 0x80;
     for (x = 0 ; x < FONT_WIDTH ; x++) {
-      if (pixels & mask) {	
+      if (pixels & mask) {
 	      pixel[0] = 255; /* Red */
         pixel[1] = 255; /* Green */
         pixel[2] = 255; /* Blue */
@@ -118,7 +118,7 @@ void fbputswrap(const char *s, int row, int col, int maxrow, int maxcol)
 
   while (((c = *s++) != 0) && (row < maxrow))
   {
-    while (col < maxcol) fbputchar(c, row, col++);
+    while (col < maxcol) fbputchar(c, row, col++)
     row++;
   }
 }
@@ -127,6 +127,45 @@ void fbputswrap(const char *s, int row, int col, int maxrow, int maxcol)
 od --address-radix=n --width=16 -v -t x1 -j 4 -N 2048 lat0-16.psfu
 
 */
+
+char keystateconvert1(int modifier, int key)
+{
+  int offset;
+  if (int = 0x28){
+    outputInt = 177;
+    outputChar = outputInt;
+    return outputChar;
+    break;
+  }else if (modifier == 0x20 || modifier == 0x02){
+    offset = 0x49;
+  } else {
+    offset = 0x5d;
+  }
+  int outputInt = key + offset;
+  char outputChar = outputInt;
+
+  return outputChar
+}
+
+char keystateconvert2(int key)
+{
+  int offset = 0x5d;
+  int outputInt;
+  char outputChar;
+  if (key == 0x00){
+    outputInt = 178;
+    outputChar = outputInt;
+    return outputChar;
+    break;
+  } else if (key == 0x28){
+    outputInt = 177;
+    outputChar = outputInt;
+    return outputChar;
+    break;
+  }
+  outputInt = key + offset;
+  outputChar = outputInt;
+}
 
 static unsigned char font[] = {
   0x00, 0x00, 0x7e, 0xc3, 0x99, 0x99, 0xf3, 0xe7, 0xe7, 0xff, 0xe7, 0xe7, 0x7e, 0x00, 0x00, 0x00,

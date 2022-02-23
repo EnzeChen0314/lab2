@@ -114,11 +114,12 @@ void fbputs(const char *s, int row, int col)
 int fbputswrap(const char *s, int row, int col, int maxrow, int maxcol)
 {
   char c;
-  int roww = row; int colw = col;
+  int roww = row, colw = col;
 
   while (((c = *s++) != 0) && (roww < maxrow))
   {
-    while (col < maxcol) fbputchar(c, roww, col++)
+    while (colw < maxcol) fbputchar(c, roww, colw++);
+    
     roww++;
   }
   
@@ -134,7 +135,7 @@ char keystateconvert1(int modifier, int key)
 {
   int offset = 0x00;
   char outputChar;
-  int outputInt
+  int outputInt;
   if (key == 0x28){
     outputInt = 177;
     outputChar = (char)outputInt;
@@ -147,7 +148,7 @@ char keystateconvert1(int modifier, int key)
   outputInt = key + offset;
   outputChar = (char)outputInt;
 
-  return outputChar
+  return outputChar;
 }
 
 char keystateconvert2(int key)

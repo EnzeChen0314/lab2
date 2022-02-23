@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include "usbkeyboard.h"
 #include <pthread.h>
+#include <stdbool.h>
 
 /* Update SERVER_HOST to be the IP address of
  * the chat server you are connecting to
@@ -101,19 +102,20 @@ int main()
   pthread_create(&network_thread, NULL, network_thread_f, NULL);
 
   /* Look for and handle keypresses */
+  char send0, send1;
   for (;;) {
     libusb_interrupt_transfer(keyboard, endpoint_address, (unsigned char *) &packet, sizeof(packet), &transferred, 0);
     if (transferred == sizeof(packet)) {
       sprintf(keystate, "%02x %02x %02x", packet.modifiers, packet.keycode[0], packet.keycode[1]);
       printf("%s\n", keystate);
-      char send0, send1;
+  
       send0 = keystateconvert1(packet.modifiers, packet.keycode[0]);
       send1 = keystateconvert2(packet.keycode[1]);
       
       if (!sendfull) {
 	fbputchar(send0, cursor1, cursor2);
 	gonext();
-	if (int(send1) != 177 || int(send1) != 178) {
+	if ((int(send1) != 177) || (int(send1) != 178)) {
 	  fbputchar(send1, cursor1, cursor2);
 	  gonext();
 	}	

@@ -111,7 +111,7 @@ void fbputs(const char *s, int row, int col)
 }
 
 // fbputs considering line wrap
-void fbputswrap(const char *s, int row, int col, int maxrow, int maxcol)
+int fbputswrap(const char *s, int row, int col, int maxrow, int maxcol)
 {
   char c;
   int roww = row; int colw = col;
@@ -121,6 +121,8 @@ void fbputswrap(const char *s, int row, int col, int maxrow, int maxcol)
     while (col < maxcol) fbputchar(c, row, col++)
     row++;
   }
+  
+  return row;
 }
 /* 8 X 16 console font from /lib/kbd/consolefonts/lat0-16.psfu.gz
 

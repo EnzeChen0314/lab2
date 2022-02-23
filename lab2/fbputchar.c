@@ -146,7 +146,7 @@ char keystateconvert1(int modifier, int key)
     outputChar = (char)outputInt;
     return outputChar;
   } else if (modifier == 0x20 || modifier == 0x02){
-    offset = 0x49;
+    offset = 0x3d;
   } else {
     offset = 0x5d;
   }

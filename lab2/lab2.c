@@ -46,7 +46,7 @@ void *network_thread_f(void *);
 void initial();
 void memRclear();
 void memSclear();
-void gonext(int *cursor1, int *cursor2, bool *sendfull);
+void gonext();
 
 int rowr = 1;
 int cursor1 = MAX_ROW_R + 1, cursor2 = 0;

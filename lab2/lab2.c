@@ -115,7 +115,7 @@ int main()
       if (!sendfull) {
 	fbputchar(send0, cursor1, cursor2);
 	gonext();
-	if (((int(send1) != 177) && (int(send1) != 178))) {
+	if ((int)send1 != 177) && ((int)send1 != 178)) {
 	  fbputchar(send1, cursor1, cursor2);
 	  gonext();
 	}	

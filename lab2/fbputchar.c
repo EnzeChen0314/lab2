@@ -137,7 +137,7 @@ char keystateconvert1(int modifier, int key)
   int outputInt
   if (key == 0x28){
     outputInt = 177;
-    outputChar = char(outputInt);
+    outputChar = (char)outputInt;
     return outputChar;
   } else if (modifier == 0x20 || modifier == 0x02){
     offset = 0x49;
@@ -145,7 +145,7 @@ char keystateconvert1(int modifier, int key)
     offset = 0x5d;
   }
   outputInt = key + offset;
-  outputChar = char(outputInt);
+  outputChar = (char)outputInt;
 
   return outputChar
 }
@@ -157,7 +157,7 @@ char keystateconvert2(int key)
   char outputChar;
   if (key == 0x00){
     outputInt = 178;
-    outputChar = char(outputInt);
+    outputChar = (char)outputInt;
     return outputChar;
   } else if (key == 0x28){
     outputInt = 177;
@@ -165,7 +165,7 @@ char keystateconvert2(int key)
     return outputChar;
   }
   outputInt = key + offset;
-  outputChar = char(outputInt);
+  outputChar = (char)outputInt;
 }
 
 static unsigned char font[] = {

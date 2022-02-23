@@ -144,15 +144,15 @@ void *network_thread_f(void *ignore)
     recvBuf[n] = '\0';
     printf("%s", recvBuf);
     if (!receivefull) {
-      if (rows == MAX_ROW_R - 1) receivefull = 1;
+      if (rowr == MAX_ROW_R - 1) receivefull = 1;
     }	
     else {
       memRclear();
       receivefull = 1;
-      rows = 1;
+      rowr = 1;
     }
-    rows = fbputswrap(recvBuf, rows, 0, MAX_ROW_R, MAX_COL);
-    rows++;
+    rowr = fbputswrap(recvBuf, rowr, 0, MAX_ROW_R, MAX_COL);
+    rowr++;
   }
 
   return NULL;

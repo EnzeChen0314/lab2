@@ -119,7 +119,10 @@ int main()
 	    gonext();
 	  }
 	}
-	else memSclear();
+	else {
+	  memSclear();
+	  cursor1 = MAX_ROW_R + 1; cursor2 = 0;
+	}
 	      
 	if ((int)send1 != 177) {
 	  if ((int)send1 != 178) {
@@ -127,7 +130,10 @@ int main()
 	    gonext();
 	  }
 	}
-	else memSclear();
+	else {
+	  memSclear();
+	  cursor1 = MAX_ROW_R + 1; cursor2 = 0;
+	}
 	      
       }
       if (packet.keycode[0] == 0x29) { /* ESC pressed? */

@@ -144,11 +144,11 @@ void *network_thread_f(void *ignore)
     recvBuf[n] = '\0';
     printf("%s", recvBuf);
     if (!receivefull) {
-      if (rows == MAX_ROW_R - 1) receivefull = true;
+      if (rows == MAX_ROW_R - 1) receivefull = 1;
     }	
     else {
       memRclear();
-      receivefull = true;
+      receivefull = 1;
       rows = 1;
     }
     rows = fbputswrap(recvBuf, rows, 0, MAX_ROW_R, MAX_COL);
@@ -162,7 +162,7 @@ void initial()
 {
   /* Draw rows of asterisks across the top and bottom of the screen */
   // Draw the horizontal line that split into receive region and send region
-  for (col = 0 ; col < MAX_COL ; col++) {
+  for (int col = 0 ; col < MAX_COL ; col++) {
     fbputchar('*', 0, col);
     fbputchar('-', MAX_ROW_R, col);
     fbputchar('*', MAX_ROW_S, col);
@@ -175,15 +175,15 @@ void initial()
 
 void memRclear()
 {
-  for (col = 0 ; col < MAX_COL ; col++) {
-    for (row = 1 ; row < MAX_ROW_R ; row++) fbputchar(' ', row, col);
+  for (int col = 0 ; col < MAX_COL ; col++) {
+    for (int row = 1 ; row < MAX_ROW_R ; row++) fbputchar(' ', row, col);
   }
 }
 
 void memSclear()
 {
-  for (col = 0 ; col < MAX_COL ; col++) {
-    for (row = MAX_ROW_R+1 ; row < MAX_ROW_S ; row++) fbputchar(' ', row, col);
+  for (int col = 0 ; col < MAX_COL ; col++) {
+    for (int row = MAX_ROW_R+1 ; row < MAX_ROW_S ; row++) fbputchar(' ', row, col);
   }
 }
 
@@ -191,7 +191,7 @@ void gonext()
 {
   if (!sendfull) {
     if (cursor2 == MAX_COL) {
-      if (cursor1 == MAX_ROW_S - 1) sendfull = true;
+      if (cursor1 == MAX_ROW_S - 1) sendfull = 1;
       else {
         cursor1++;
         cursor2 = 0;

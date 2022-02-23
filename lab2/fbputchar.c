@@ -132,19 +132,20 @@ od --address-radix=n --width=16 -v -t x1 -j 4 -N 2048 lat0-16.psfu
 
 char keystateconvert1(int modifier, int key)
 {
-  int offset;
-  if (int = 0x28){
+  int offset = 0x00;
+  char outputChar;
+  int outputInt
+  if (key == 0x28){
     outputInt = 177;
-    outputChar = outputInt;
+    outputChar = char(outputInt);
     return outputChar;
-    break;
-  }else if (modifier == 0x20 || modifier == 0x02){
+  } else if (modifier == 0x20 || modifier == 0x02){
     offset = 0x49;
   } else {
     offset = 0x5d;
   }
-  int outputInt = key + offset;
-  char outputChar = outputInt;
+  outputInt = key + offset;
+  outputChar = char(outputInt);
 
   return outputChar
 }
@@ -156,17 +157,15 @@ char keystateconvert2(int key)
   char outputChar;
   if (key == 0x00){
     outputInt = 178;
-    outputChar = outputInt;
+    outputChar = char(outputInt);
     return outputChar;
-    break;
   } else if (key == 0x28){
     outputInt = 177;
     outputChar = outputInt;
     return outputChar;
-    break;
   }
   outputInt = key + offset;
-  outputChar = outputInt;
+  outputChar = char(outputInt);
 }
 
 static unsigned char font[] = {

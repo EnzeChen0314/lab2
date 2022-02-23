@@ -113,18 +113,22 @@ int main()
       send1 = keystateconvert2(packet.keycode[1]);
       
       if (!sendfull) {
-        if ((int)send1 != 177) {
-	  if ((int)send1 != 178) {
-	    fbputchar(send1, cursor1, cursor2);
+        if ((int)send0 != 177) {
+	  if ((int)send0 != 178) {
+	    fbputchar(send0, cursor1, cursor2);
 	    gonext();
 	  }
-	}	
+	}
+	else memSclear();
+	      
 	if ((int)send1 != 177) {
 	  if ((int)send1 != 178) {
 	    fbputchar(send1, cursor1, cursor2);
 	    gonext();
 	  }
-	}	
+	}
+	else memSclear();
+	      
       }
       if (packet.keycode[0] == 0x29) { /* ESC pressed? */
 	break;

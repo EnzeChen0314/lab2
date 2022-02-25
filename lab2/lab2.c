@@ -109,7 +109,7 @@ int main()
       sprintf(keystate, "%02x %02x %02x", packet.modifiers, packet.keycode[0], packet.keycode[1]);
       printf("%s\n", keystate);
   
-      send0 = keystateconvert1(...);
+      send0 = keystateconvert1(packet.modifiers, packet.keycode[0]);
       send1 = keystateconvert2(packet.modifiers, packet.keycode[1]);
       
       if (!sendfull) {

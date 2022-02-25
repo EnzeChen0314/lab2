@@ -135,47 +135,130 @@ od --address-radix=n --width=16 -v -t x1 -j 4 -N 2048 lat0-16.psfu
 
 */
 
-char keystateconvert1(int modifier, int key)
+char keystateconvert(int modifier, int key)
 {
-  int offset = 0x00;
+  int offset = 0;
   char outputChar;
   int outputInt;
+
+  //Special/Functional inputs
+  //no input
   if (key == 0x00){
     outputInt = 178;
     outputChar = (char)outputInt;
     return outputChar;
-  } 
-  else if (key == 0x28){
-    outputInt = 177;
-    outputChar = (char)outputInt;
-    return outputChar;
-  } else if (modifier == 0x20 || modifier == 0x02){
-    offset = 0x3d;
-  } else {
-    offset = 0x5d;
-  }
-  outputInt = key + offset;
-  outputChar = (char)outputInt;
-
-  return outputChar;
-}
-
-char keystateconvert2(int key)
-{
-  int offset = 0x5d;
-  int outputInt;
-  char outputChar;
-  if (key == 0x00){
-    outputInt = 178;
-    outputChar = (char)outputInt;
-    return outputChar;
+  //Enter
   } else if (key == 0x28){
     outputInt = 177;
-    outputChar = outputInt;
+    outputChar = (char)outputInt;
     return outputChar;
+  //Backspace
+  } else if (key == 0x2a){
+      outputInt = 179;
+      outputChar = (char)outputInt;
+      return outputChar;
+  }
+
+  //Normal inputs
+  //Key with SHIFT
+  if (modifier == 0x20 || modifier == 0x02){
+      //double quote
+      if (key == 0x34){
+          offset = -18;
+      //plus
+      } else if (key == 0x2e){
+          offset = -3;
+      //parenthesis and &
+      } else if (key == 0x27 || key == 0x24 || key ==0x26){
+          offset = 2;
+      //! # $ %
+      } else if (key == 0x1e || key == 0x20 || key == 0x21 || key == 0x22){
+          offset = 3;
+      //asterisk
+      } else if (key == 0x25){
+          offset = 5;
+      //less than
+      } else if (key == 0x36){
+          offset = 6;
+      //greater than, question mark, and colon
+      } else if (key == 0x37 || key == 0x38 || key == 0x33){
+          offset = 7
+      //at
+      } else if (key == 0x1f){
+          offset = 33;
+      //underscore
+      } else if (key == 0x2d){
+          offset = 50;
+      // ^
+      } else if (key == 0x23){
+          offset = 59;
+      // ~
+      } else if (key == 0x35){
+          offset = 74;
+      // |
+      } else if (key == 0x31){
+          offset = 75;
+      // {
+      } else if (key == 0x2f){
+          offset = 76;
+      // }
+      } else if (key == 0x30){
+          offset = 77;
+      //space
+      } else if (key == 0x2c){
+          offset = -12;
+      //all capital letters
+      } else {
+          offset = 61;
+      }
+
+  //Key without SHIFT
+  } else if (modifier == 0x00){
+      //number from 1 to 9
+      if (key == 0x1e || key == 0x1f || key == 0x20 || key == 0x21 || key == 0x22 || 
+      key == 0x23 || key == 0x24 || key == 0x25 || key == 0x26){
+          offset = 19;
+      //single quote
+      } else if (key == 0x34){
+          offset = -13;
+      //space
+      } else if (key == 0x2c){
+          offset = -12;
+      //comma
+      } else if (key == 0x36){
+          offset = -10;
+      //period and slash
+      } else if (key == 0x37 || key == 0x38){
+          offset = -9;
+      //minus
+      } else if (key == 0x2d){
+          offset = 0;
+      //semicolon
+      } else if (key == 0x33){
+          offset = 8;
+      //number 0
+      } else if (key == 0x27){
+          offset = 9;
+      //equal
+      } else if (key == 0x2e){
+          offset = 15;
+      //backslash
+      } else if (key == 0x31){
+          offset = 43;
+      //[ and `
+      } else if (key == 0x2f || key == 0x35){
+          offset = 44;
+      //closing bracket
+      } else if (key == 0x30){
+          offset = 45;
+      //all letters
+      } else {
+          offset = 93;
+      }
   }
   outputInt = key + offset;
   outputChar = (char)outputInt;
+  return outputChar;
 }
 
 static unsigned char font[] = {

@@ -141,7 +141,7 @@ char keystateconvert(int modifier, int key)
   char outputChar;
   int outputInt;
 
-  //Special/Functional inputs
+  //Special/Functional inputs - ignoring SHIFT
   //no input
   if (key == 0x00){
     outputInt = 178;
@@ -155,6 +155,16 @@ char keystateconvert(int modifier, int key)
   //Backspace
   } else if (key == 0x2a){
       outputInt = 179;
+      outputChar = (char)outputInt;
+      return outputChar;
+  //Left arrow
+  } else if (key == 0x50){
+      outputInt = 180;
+      outputChar = (char)outputInt;
+      return outputChar
+  //Right arrow    
+  } else if (key == 0x4f){
+      outputInt = 181;
       outputChar = (char)outputInt;
       return outputChar;
   }
@@ -182,7 +192,7 @@ char keystateconvert(int modifier, int key)
           offset = 6;
       //greater than, question mark, and colon
       } else if (key == 0x37 || key == 0x38 || key == 0x33){
-          offset = 7;
+          offset = 7
       //at
       } else if (key == 0x1f){
           offset = 33;
@@ -194,7 +204,7 @@ char keystateconvert(int modifier, int key)
           offset = 59;
       // ~
       } else if (key == 0x35){
-          offset = 74;
+          offset = 73;
       // |
       } else if (key == 0x31){
           offset = 75;
@@ -215,8 +225,7 @@ char keystateconvert(int modifier, int key)
   //Key without SHIFT
   } else if (modifier == 0x00){
       //number from 1 to 9
-      if (key == 0x1e || key == 0x1f || key == 0x20 || key == 0x21 || key == 0x22 || 
-      key == 0x23 || key == 0x24 || key == 0x25 || key == 0x26){
+      if (key >= 0x1e && key <= 0x26){
           offset = 19;
       //single quote
       } else if (key == 0x34){
@@ -242,11 +251,11 @@ char keystateconvert(int modifier, int key)
       //equal
       } else if (key == 0x2e){
           offset = 15;
-      //backslash
-      } else if (key == 0x31){
+      //backslash and `
+      } else if (key == 0x31 || key == 0x35){
           offset = 43;
-      //[ and `
-      } else if (key == 0x2f || key == 0x35){
+      //opening bracket
+      } else if (key == 0x2f){
           offset = 44;
       //closing bracket
       } else if (key == 0x30){

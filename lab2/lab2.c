@@ -147,7 +147,7 @@ int main()
       	      }
 	    }   
 	  }
-    
+        
 	if ((int)send1 != 177) {
 	  if ((int)send1 != 178) {
 	    if ((int)send1 != 180) {
@@ -167,10 +167,13 @@ int main()
 	  }
 	}
       }
-      if ((int)send0 == 177) { write(sockfd, sendram, pos1); pos1 = 0; ramclear();} 
-      
+      else {
       if ((int)send0 == 179) {sendfull = 0; del();}
       if ((int)send0 == 180) {sendfull = 0; golast();}
+      }
+	    
+      if ((int)send0 == 177) { write(sockfd, sendram, pos1); pos1 = 0; ramclear();} 
+      
 			      
       if (packet.keycode[0] == 0x29) { /* ESC pressed? */
 	      break;

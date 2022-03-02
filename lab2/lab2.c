@@ -280,7 +280,7 @@ void golast()
   }
   else {
     cursor2 = MAX_COL - 1;
-    cursor1 = MAX_ROW_R + 1;
+    cursor1 = MAX_ROW_S - 1;
   }
 	ramshow();
 	cursorshow();
@@ -289,7 +289,7 @@ void golast()
 int cursor2ram()
 {
 	if (cursor2 < MAX_COL) return (cursor1 - MAX_ROW_R - 1) * MAX_COL + cursor2;
-	else return MAX_COL;
+	else return (2 * MAX_COL - 1);
 }
 
 void cursorshow()

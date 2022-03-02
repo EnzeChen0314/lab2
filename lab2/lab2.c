@@ -150,13 +150,11 @@ int main()
 	    if ((int)send1 != 180) {
 	      if ((int)send1 != 181) {
 	        if ((int)send1 != 179) {
-			if (nxtready){
 		  pos = cursor2ram();
 		  sendram[pos] = send1;
 	          //fbputchar(send1, cursor1, cursor2);
 	          gonext();
 		  nxtready = 0;}
-	        }
 		else del();
 	      }
 	      else gonext();

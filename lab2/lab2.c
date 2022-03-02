@@ -59,7 +59,6 @@ int cursor1 = MAX_ROW_R + 1, cursor2 = 0;
 char sendram[2 * MAX_COL];
 bool sendfull = 0, receivefull = 0;
 
-for (int i = 0; i < 2 * MAX_COL; i++) {sendram[i] = ' ';}
 
 int main()
 {

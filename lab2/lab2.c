@@ -48,9 +48,12 @@ void initial();
 void memRclear();
 void memSclear();
 void gonext();
+void cursorshow();
+int cursor2ram(int cursor1, int cursor2);
 
 int rowr = 1;
 int cursor1 = MAX_ROW_R + 1, cursor2 = 0;
+char sendram[2 * MAX_COL] = ' ';
 bool sendfull = 0, receivefull = 0;
 
 int main()
@@ -103,6 +106,7 @@ int main()
 
   /* Look for and handle keypresses */
   char send0, send1;
+	int pos = 0;
   for (;;) {
     libusb_interrupt_transfer(keyboard, endpoint_address, (unsigned char *) &packet, sizeof(packet), &transferred, 0);
     if (transferred == sizeof(packet)) {
@@ -114,30 +118,27 @@ int main()
       
       if (!sendfull) {
         if ((int)send0 != 177) {
-	  if ((int)send0 != 178) {
-	    fbputchar(send0, cursor1, cursor2);
-	    gonext();
-	  }
-	}
-	else {
-	  memSclear();
-	  cursor1 = MAX_ROW_R + 1; cursor2 = 0;
-	}
-	      
-	if ((int)send1 != 177) {
-	  if ((int)send1 != 178) {
-	    fbputchar(send1, cursor1, cursor2);
-	    gonext();
-	  }
-	}
-	else {
-	  memSclear();
-	  cursor1 = MAX_ROW_R + 1; cursor2 = 0;
-	}
-	      
+          if ((int)send0 != 178) {
+	          pos = cursor2ram(cursor1, cursor2);
+						sendram[pos] = send0;
+						//fbputchar(send0, cursor1, cursor2);
+	          gonext();
+          }
+      	}
+        else memSclear();
+	  
+	      if ((int)send1 != 177) {
+	        if ((int)send1 != 178) {
+						pos = cursor2ram(cursor1, cursor2);
+						sendram[pos] = send1;
+	          //fbputchar(send1, cursor1, cursor2);
+	          gonext();
+	        }
+	      }
+	      else memSclear();
       }
       if (packet.keycode[0] == 0x29) { /* ESC pressed? */
-	break;
+	      break;
       }
     }
   }
@@ -188,7 +189,7 @@ void initial()
 
   // Screen Clean
   memRclear();
-  memSclear();
+  ramclear();
 }
 
 void memRclear()
@@ -198,11 +199,21 @@ void memRclear()
   }
 }
 
-void memSclear()
+/*void memSclear()
 {
   for (int col = 0 ; col < MAX_COL ; col++) {
     for (int row = MAX_ROW_R+1 ; row < MAX_ROW_S ; row++) fbputchar(' ', row, col);
   }
+  cursor1 = MAX_ROW_R + 1; cursor2 = 0;
+  cursorshow();
+}*/
+
+void ramclear()
+{
+  for (int i = 0; i < MAX_COL * 2; i++) sendram[i] = ' ';
+  cursor1 = MAX_ROW_R + 1; cursor2 = 0;
+	ramshow();
+	cursorshow();
 }
 
 void gonext()
@@ -217,4 +228,49 @@ void gonext()
     }
     else cursor2++;
   }
+	ramshow();
+	cursorshow();
+}
+
+void golast()
+{
+  if (!sendfull) {
+    if (cursor2 == 0) {
+      if (cursor1 == MAX_ROW_S - 1) {
+        cursor2 = MAX_COL - 1;
+        cursor1 = MAX_ROW_R + 1;
+      }
+    }
+    else cursor2--;
+  }
+  else {
+    cursor2 = MAX_COL - 1;
+    cursor1 = MAX_ROW_R + 1;
+  }
+	ramshow();
+	cursorshow();
+}
+
+int cursor2ram(int cursor1, int cursor2)
+{
+	return (cursor1 - MAX_ROW_R - 1) * MAX_COL + cursor2;
+}
+
+void cursorshow()
+{
+  if (!sendfull) fbputchar('_', cursor1, cursor2);
+}
+
+void ramshow()
+{
+	fbputswrap(sendram, MAX_ROW_R + 1, 0, MAX_ROW_S, MAX_COL);
+}
+
+void del();
+{
+	int tem = cursor2ram(cursor1, cursor2);
+	for (int i = tem; i < 2 * MAX_COL - 1; i++) ram[i] = ram[i + 1];
+	ram[2 * MAX_COL - 1] = ' ';
+	ramshow();
+	cursorshow();
 }

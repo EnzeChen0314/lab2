@@ -159,6 +159,10 @@ int main()
 	}
       }
       if ((int)send0 == 177) { write(sockfd, sendram, pos+1); ramclear();} 
+      
+      if ((int)send0 == 179) del();
+      if ((int)send0 == 180) golast();
+      if ((int)send0 == 181) gonext();
 			      
       if (packet.keycode[0] == 0x29) { /* ESC pressed? */
 	      break;

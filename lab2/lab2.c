@@ -168,8 +168,8 @@ int main()
       }
       if ((int)send0 == 177) { write(sockfd, sendram, pos1); pos1 = 0; ramclear();} 
       
-      if ((int)send0 == 179) sendfull = 0;
-      if ((int)send0 == 180) sendfull = 0;
+      if ((int)send0 == 179) {sendfull = 0; del();}
+      if ((int)send0 == 180) {sendfull = 0; golast();}
 			      
       if (packet.keycode[0] == 0x29) { /* ESC pressed? */
 	      break;

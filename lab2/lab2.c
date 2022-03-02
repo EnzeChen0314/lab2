@@ -261,7 +261,7 @@ void gonext()
 	ramshow(); cursorshow();
       }
     }
-    else (cursor2ram() <= pos1) {cursor2++; ramshow(); cursorshow();}
+    else if (cursor2ram() <= pos1) {cursor2++; ramshow(); cursorshow();}
   }
 }
 

@@ -259,11 +259,12 @@ void gonext()
       else if (cursor2ram() <= pos1){
         cursor1++;
         cursor2 = 0;
-	ramshow(); cursorshow();
       }
     }
-    else if (cursor2ram() <= pos1) {cursor2++; ramshow(); cursorshow();}
+    else if (cursor2ram() <= pos1) cursor2++;
   }
+  ramshow();
+  cursorshow();
 }
 
 void golast()

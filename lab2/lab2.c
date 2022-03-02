@@ -57,7 +57,7 @@ int cursor2ram();
 int rowr = 1;
 int cursor1 = MAX_ROW_R + 1, cursor2 = 0;
 char sendram[2 * MAX_COL];
-bool sendfull = 0, receivefull = 0;
+bool sendfull, receivefull;
 
 
 int main()
@@ -171,9 +171,8 @@ void *network_thread_f(void *ignore)
       if (rowr == MAX_ROW_R - 1) receivefull = 1;
     }	
     else {
-      memRclear();
-      receivefull = 1;
       rowr = 1;
+      memRclear();
     }
     rowr = fbputswrap(recvBuf, rowr, 0, MAX_ROW_R, MAX_COL);
     rowr++;
@@ -202,6 +201,7 @@ void memRclear()
   for (int col = 0 ; col < MAX_COL ; col++) {
     for (int row = 1 ; row < MAX_ROW_R ; row++) fbputchar(' ', row, col);
   }
+  receivefull = 0;
 }
 
 /*void memSclear()

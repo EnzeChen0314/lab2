@@ -196,6 +196,7 @@ void *network_thread_f(void *ignore)
       memRclear();
     }
     rowr = fbputswrap(recvBuf, rowr, 0, MAX_ROW_R, MAX_COL);
+    for (int i = 0; i < n; i++) recvBuf[i] = ' ';
   }
 
   return NULL;

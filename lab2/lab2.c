@@ -294,7 +294,7 @@ int cursor2ram()
 
 void cursorshow()
 {
-  if (cursor2 < MAX_COL - 1) fbputchar('_', cursor1, cursor2);
+  if (cursor2 < MAX_COL) fbputchar('_', cursor1, cursor2);
 }
 
 void ramshow()
@@ -308,7 +308,7 @@ void del()
 	int tem = cursor2ram();
 	for (int i = tem; i < 2 * MAX_COL - 1; i++) sendram[i] = sendram[i + 1];
 	sendram[2 * MAX_COL - 1] = ' ';
+	if (pos1 > 0) pos1 --;
 	ramshow();
 	cursorshow();
-	if (pos1 > 0) pos1 --;
 }

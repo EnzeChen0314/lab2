@@ -46,7 +46,7 @@ void *network_thread_f(void *);
 
 void initial();
 void memRclear();
-void memSclear();
+//void memSclear();
 void gonext();
 void cursorshow();
 void ramshow();
@@ -129,7 +129,7 @@ int main()
 	          gonext();
           }
       	}
-        else memSclear();
+        else ramclear();
 	  
 	      if ((int)send1 != 177) {
 	        if ((int)send1 != 178) {
@@ -139,7 +139,7 @@ int main()
 	          gonext();
 	        }
 	      }
-	      else memSclear();
+	      else ramclear();
       }
       if (packet.keycode[0] == 0x29) { /* ESC pressed? */
 	      break;

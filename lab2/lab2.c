@@ -117,10 +117,10 @@ int main()
     if (transferred == sizeof(packet)) {
       sprintf(keystate, "%02x %02x %02x", packet.modifiers, packet.keycode[0], packet.keycode[1]);
       printf("%s\n", keystate);
-  
+      
+      send0 = keystateconvert(packet.modifiers, packet.keycode[0]);
+      send1 = keystateconvert(packet.modifiers, packet.keycode[1]);
       if (!sendfull) {
-        send0 = keystateconvert(packet.modifiers, packet.keycode[0]);
-        send1 = keystateconvert(packet.modifiers, packet.keycode[1]);
         if ((int)send0 != 177) {
           if ((int)send0 != 178) {
 	    if ((int)send0 != 180) {
@@ -159,9 +159,8 @@ int main()
       }
       if ((int)send0 == 177) { write(sockfd, sendram, pos+1); ramclear();} 
       
-      if ((int)send0 == 179) del();
-      if ((int)send0 == 180) golast();
-      if ((int)send0 == 181) gonext();
+      if ((int)send0 == 179) {sendfull = 0; del();}
+      if ((int)send0 == 180) {sendfull = 0; golast();}
 			      
       if (packet.keycode[0] == 0x29) { /* ESC pressed? */
 	      break;

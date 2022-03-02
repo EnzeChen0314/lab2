@@ -194,7 +194,7 @@ void *network_thread_f(void *ignore)
       rowr = 1;
       memRclear();
     }
-    rowr = fbputswrap(&recvBuf, rowr, 0, MAX_ROW_R, MAX_COL);
+    rowr = fbputswrap(recvBuf, rowr, 0, MAX_ROW_R, MAX_COL);
   }
 
   return NULL;

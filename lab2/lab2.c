@@ -123,26 +123,28 @@ int main()
       send1 = keystateconvert(packet.modifiers, packet.keycode[1]);
       if ((int)send0 == 178) nxtready = 1;
       if (!sendfull) {
-	if (nxtready){
-	if ((int)send1 == 178) {     
-        if ((int)send0 != 177) {
-          if ((int)send0 != 178) {
-	    if ((int)send0 != 180) {
-	      if ((int)send0 != 181) {
-	        if ((int)send0 != 179) {
-	          pos = cursor2ram(cursor1, cursor2);	
-		  sendram[pos] = send0;
+	  if (nxtready){
+	    if ((int)send1 == 178) {     
+              if ((int)send0 != 177) {
+                if ((int)send0 != 178) {
+	          if ((int)send0 != 180) {
+	            if ((int)send0 != 181) {
+	              if ((int)send0 != 179) {
+	                pos = cursor2ram(cursor1, cursor2);	
+		        sendram[pos] = send0;
 						//fbputchar(send0, cursor1, cursor2);
-	          gonext();
-		}
-		else del();
-	      }
-	      else gonext();
-	    }
-	    else golast();
+	                gonext();
+		      }
+		      else del();
+	            }
+	            else gonext();
+	          }
+	          else golast();
+	        }
+      	      }
+	    }   
 	  }
-      	}
-	}  }
+    
 	if ((int)send1 != 177) {
 	  if ((int)send1 != 178) {
 	    if ((int)send1 != 180) {
@@ -153,7 +155,7 @@ int main()
 		  sendram[pos] = send1;
 	          //fbputchar(send1, cursor1, cursor2);
 	          gonext();
-		  nxtready = 0;
+		  nxtready = 0;}
 	        }
 		else del();
 	      }

@@ -278,9 +278,10 @@ void golast()
     }
     else cursor2--;
   }
-  else {
-    cursor2 = MAX_COL - 1;
-    cursor1 = MAX_ROW_S - 1;
+  if (cursor2 >= MAX_COL) 
+  {
+	cursor2 = MAX_COL - 1;
+        cursor1 = MAX_ROW_S - 1;  
   }
 	ramshow();
 	cursorshow();

@@ -220,7 +220,7 @@ char keystateconvert(int modifier, int key)
       } else if (key == 0x2c){
           offset = -12;
       //all capital letters
-      } else {
+      } else if (key >= 0x04 && key <= 0x1d){
           offset = 61;
       }
 
@@ -263,7 +263,7 @@ char keystateconvert(int modifier, int key)
       } else if (key == 0x30){
           offset = 45;
       //all letters
-      } else {
+      } else if (key >= 0x04 && key <= 0x1d){
           offset = 93;
       }
   }

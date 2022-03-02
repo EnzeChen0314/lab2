@@ -118,10 +118,9 @@ int main()
       sprintf(keystate, "%02x %02x %02x", packet.modifiers, packet.keycode[0], packet.keycode[1]);
       printf("%s\n", keystate);
   
-      send0 = keystateconvert(packet.modifiers, packet.keycode[0]);
-      send1 = keystateconvert(packet.modifiers, packet.keycode[1]);
-      
       if (!sendfull) {
+        send0 = keystateconvert(packet.modifiers, packet.keycode[0]);
+        send1 = keystateconvert(packet.modifiers, packet.keycode[1]);
         if ((int)send0 != 177) {
           if ((int)send0 != 178) {
 	    if ((int)send0 != 180) {
@@ -186,7 +185,6 @@ void *network_thread_f(void *ignore)
   int n;
 	
   /* Receive data */
-  for (int i = 0; i < BUFFER_SIZE; i++) recvBuf[i] = ' ';
   while ( (n = read(sockfd, &recvBuf, BUFFER_SIZE - 1)) > 0 ) {
     recvBuf[n] = '\0';
     printf("%s", recvBuf);
@@ -197,7 +195,7 @@ void *network_thread_f(void *ignore)
       rowr = 1;
       memRclear();
     }
-    rowr = fbputswrapn(recvBuf, n, rowr, 0, MAX_ROW_R, MAX_COL);
+    rowr = fbputswrap(&recvBuf, rowr, 0, MAX_ROW_R, MAX_COL);
     rowr++;
     for (int i = 0; i < BUFFER_SIZE; i++) recvBuf[i] = ' ';
   }

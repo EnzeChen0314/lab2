@@ -49,6 +49,9 @@ void memRclear();
 void memSclear();
 void gonext();
 void cursorshow();
+void ramshow();
+void ramclear();
+void del();
 int cursor2ram(int cursor1, int cursor2);
 
 int rowr = 1;
@@ -266,7 +269,7 @@ void ramshow()
 	fbputswrap(sendram, MAX_ROW_R + 1, 0, MAX_ROW_S, MAX_COL);
 }
 
-void del();
+void del()
 {
 	int tem = cursor2ram(cursor1, cursor2);
 	for (int i = tem; i < 2 * MAX_COL - 1; i++) ram[i] = ram[i + 1];

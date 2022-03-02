@@ -57,7 +57,7 @@ int cursor2ram();
 
 int rowr = 1;
 int cursor1 = MAX_ROW_R + 1, cursor2 = 0;
-char sendram[2 * MAX_COL];
+char sendram[2 * MAX_COL - 1];
 bool sendfull, receivefull;
 
 

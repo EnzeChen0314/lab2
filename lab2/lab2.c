@@ -129,7 +129,6 @@ int main()
 	          gonext();
           }
       	}
-        else ramclear();
 	  
 	      if ((int)send1 != 177) {
 	        if ((int)send1 != 178) {
@@ -139,7 +138,6 @@ int main()
 	          gonext();
 	        }
 	      }
-	      else ramclear();
       }
       if ((int)send0 == 177) ramclear(); 
       if (packet.keycode[0] == 0x29) { /* ESC pressed? */

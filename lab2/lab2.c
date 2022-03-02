@@ -255,7 +255,7 @@ void gonext()
 {
   if (!sendfull) {
     if (cursor2 == MAX_COL - 1) {
-      if (cursor1 == MAX_ROW_S - 1) sendfull = 1;
+      if (cursor1 == MAX_ROW_S - 1) {sendfull = 1; cursor2++;}
       else if (cursor2ram() <= pos1){
         cursor1++;
         cursor2 = 0;

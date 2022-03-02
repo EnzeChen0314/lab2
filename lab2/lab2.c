@@ -52,12 +52,14 @@ void cursorshow();
 void ramshow();
 void ramclear();
 void del();
-int cursor2ram(int cursor1, int cursor2);
+int cursor2ram();
 
 int rowr = 1;
 int cursor1 = MAX_ROW_R + 1, cursor2 = 0;
-char sendram[2 * MAX_COL] = ' ';
+char sendram[2 * MAX_COL];
 bool sendfull = 0, receivefull = 0;
+
+for (int i = 0; i < 2 * MAX_COL; i++) sendram[i] = ' ';
 
 int main()
 {
@@ -132,7 +134,7 @@ int main()
 	  
 	      if ((int)send1 != 177) {
 	        if ((int)send1 != 178) {
-						pos = cursor2ram(cursor1, cursor2);
+						pos = cursor2ram();
 						sendram[pos] = send1;
 	          //fbputchar(send1, cursor1, cursor2);
 	          gonext();
@@ -254,7 +256,7 @@ void golast()
 	cursorshow();
 }
 
-int cursor2ram(int cursor1, int cursor2)
+int cursor2ram()
 {
 	return (cursor1 - MAX_ROW_R - 1) * MAX_COL + cursor2;
 }
@@ -271,9 +273,9 @@ void ramshow()
 
 void del()
 {
-	int tem = cursor2ram(cursor1, cursor2);
-	for (int i = tem; i < 2 * MAX_COL - 1; i++) ram[i] = ram[i + 1];
-	ram[2 * MAX_COL - 1] = ' ';
+	int tem = cursor2ram();
+	for (int i = tem; i < 2 * MAX_COL - 1; i++) sendram[i] = sendram[i + 1];
+	sendram[2 * MAX_COL - 1] = ' ';
 	ramshow();
 	cursorshow();
 }

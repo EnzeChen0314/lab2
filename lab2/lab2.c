@@ -167,7 +167,7 @@ void *network_thread_f(void *ignore)
     recvBuf[n] = '\0';
     printf("%s", recvBuf);
     if (!receivefull) {
-      if (rowr == MAX_ROW_R - 1) receivefull = 1;
+      if (rowr >= MAX_ROW_R - 1) receivefull = 1;
     }	
     else {
       rowr = 1;
@@ -224,7 +224,7 @@ void ramclear()
 void gonext()
 {
   if (!sendfull) {
-    if (cursor2 == MAX_COL) {
+    if (cursor2 == MAX_COL - 1) {
       if (cursor1 == MAX_ROW_S - 1) sendfull = 1;
       else {
         cursor1++;
@@ -256,7 +256,7 @@ void golast()
 
 int cursor2ram()
 {
-	if (cursor2 != MAX_COL) return (cursor1 - MAX_ROW_R - 1) * MAX_COL + cursor2;
+	if (cursor2 < MAX_COL) return (cursor1 - MAX_ROW_R - 1) * MAX_COL + cursor2;
 	else return MAX_COL;
 }
 

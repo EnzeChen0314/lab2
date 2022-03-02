@@ -256,7 +256,8 @@ void golast()
 
 int cursor2ram()
 {
-	return (cursor1 - MAX_ROW_R - 1) * MAX_COL + cursor2;
+	if (cursor2 != MAX_COL) return (cursor1 - MAX_ROW_R - 1) * MAX_COL + cursor2;
+	else return MAX_COL;
 }
 
 void cursorshow()

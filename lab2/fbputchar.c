@@ -161,7 +161,7 @@ char keystateconvert(int modifier, int key)
   } else if (key == 0x50){
       outputInt = 180;
       outputChar = (char)outputInt;
-      return outputChar
+      return outputChar;
   //Right arrow    
   } else if (key == 0x4f){
       outputInt = 181;
@@ -192,7 +192,7 @@ char keystateconvert(int modifier, int key)
           offset = 6;
       //greater than, question mark, and colon
       } else if (key == 0x37 || key == 0x38 || key == 0x33){
-          offset = 7
+          offset = 7;
       //at
       } else if (key == 0x1f){
           offset = 33;

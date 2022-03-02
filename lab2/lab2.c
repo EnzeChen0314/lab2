@@ -216,7 +216,7 @@ void memRclear()
 void ramclear()
 {
   for (int i = 0; i < MAX_COL * 2; i++) sendram[i] = ' ';
-  cursor1 = MAX_ROW_R + 1; cursor2 = 0;
+  cursor1 = MAX_ROW_R + 1; cursor2 = 0; sendfull = 0;
 	ramshow();
 	cursorshow();
 }

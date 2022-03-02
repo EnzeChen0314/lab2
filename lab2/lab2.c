@@ -112,6 +112,7 @@ int main()
   /* Look for and handle keypresses */
   char send0, send1;
 	int pos = 0;
+	int nxtready = 1;
   for (;;) {
     libusb_interrupt_transfer(keyboard, endpoint_address, (unsigned char *) &packet, sizeof(packet), &transferred, 0);
     if (transferred == sizeof(packet)) {
@@ -120,7 +121,10 @@ int main()
       
       send0 = keystateconvert(packet.modifiers, packet.keycode[0]);
       send1 = keystateconvert(packet.modifiers, packet.keycode[1]);
+	    if ((int)send0 == 178) nxtready = 1;
+	    else nxtready = 0;
       if (!sendfull) {
+	if (nxtready){
 	if ((int)send1 == 178) {     
         if ((int)send0 != 177) {
           if ((int)send0 != 178) {
@@ -139,7 +143,7 @@ int main()
 	    else golast();
 	  }
       	}
-	}  
+	}  }
 	if ((int)send1 != 177) {
 	  if ((int)send1 != 178) {
 	    if ((int)send0 != 180) {

@@ -136,6 +136,7 @@ int main()
 			pos1++;
 						//fbputchar(send0, cursor1, cursor2);
 	                gonext();
+			nxtready = 0;
 		      }
 		      else del();
 	            }
@@ -157,7 +158,7 @@ int main()
 	          pos1++;
 	          //fbputchar(send1, cursor1, cursor2);
 	          gonext();
-		  nxtready = 0;}
+		  }
 		else del();
 	      }
 	      else gonext();

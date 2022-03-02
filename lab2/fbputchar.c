@@ -127,7 +127,6 @@ int fbputswrap(const char *s, int row, int col, int maxrow, int maxcol)
 	    fbputchar(c, roww, colw++);
     }
   }
-  roww++;
   return roww;
 }
 

@@ -262,7 +262,7 @@ int cursor2ram()
 
 void cursorshow()
 {
-  if (!sendfull) fbputchar('_', cursor1, cursor2);
+  if (cursor2 < MAX_COL) fbputchar('_', cursor1, cursor2);
 }
 
 void ramshow()

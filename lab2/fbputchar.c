@@ -115,15 +115,18 @@ int fbputswrap(const char *s, int row, int col, int maxrow, int maxcol)
 {
   char c = *s;
   int roww = row, colw = col;
+	int check;
 
   while (((c = *s++) != 0) && (roww < maxrow))
   {	  
     if (colw < maxcol) {
+	    check = 0;
       fbputchar(c, roww, colw++);
     }
-    else {
+    else if (check == 0){
+	    check = 1;
 	    roww++;
-    colw = 0;
+            colw = 0;
     }
   }
   return roww;

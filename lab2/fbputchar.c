@@ -118,6 +118,7 @@ int fbputswrap(const char *s, int row, int col, int maxrow, int maxcol)
 
   while ((c != 0) && (roww < maxrow))
   {
+    if(c != '\n') {
     while (colw < maxcol) {
       fbputchar(c, roww, colw++);
       c = *++s;
@@ -126,29 +127,10 @@ int fbputswrap(const char *s, int row, int col, int maxrow, int maxcol)
     roww++;
     colw = 0;
   }
-  
+  }
   return roww;
 }
 
-int fbputswrapn(const char *s, int n, int row, int col, int maxrow, int maxcol)
-{
-  char c = *s;
-  int roww = row, colw = col;
-  int i = 0;
-  while ((i < n) && (roww < maxrow))
-  {
-    while (colw < maxcol) {
-      fbputchar(c, roww, colw++);
-      c = *++s;
-      i++;
-    }
-    
-    roww++;
-    colw = 0;
-  }
-  
-  return roww;
-}
 
 /* 8 X 16 console font from /lib/kbd/consolefonts/lat0-16.psfu.gz
 

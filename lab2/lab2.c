@@ -57,7 +57,7 @@ int cursor2ram();
 
 int rowr = 1;
 int cursor1 = MAX_ROW_R + 1, cursor2 = 0;
-char sendram[2 * MAX_COL - 1];
+char sendram[2 * MAX_COL];
 bool sendfull, receivefull;
 int pos1 = 0;
 
@@ -205,6 +205,7 @@ void *network_thread_f(void *ignore)
     }
     rowr = fbputswrap(recvBuf, rowr, 0, MAX_ROW_R, MAX_COL);
     for (int i = 0; i < n; i++) recvBuf[i] = ' ';
+    rowr++;
   }
 
   return NULL;

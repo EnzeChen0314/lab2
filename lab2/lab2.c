@@ -48,6 +48,7 @@ void initial();
 void memRclear();
 //void memSclear();
 void gonext();
+void golast();
 void cursorshow();
 void ramshow();
 void ramclear();
@@ -291,6 +292,7 @@ void ramshow()
 
 void del()
 {
+	golast();
 	int tem = cursor2ram();
 	for (int i = tem; i < 2 * MAX_COL - 1; i++) sendram[i] = sendram[i + 1];
 	sendram[2 * MAX_COL - 1] = ' ';

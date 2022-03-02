@@ -230,10 +230,8 @@ void gonext()
         cursor2 = 0;
       }
     }
-    else cursor2++;
+    else {cursor2++; ramshow(); cursorshow();}
   }
-	ramshow();
-	cursorshow();
 }
 
 void golast()

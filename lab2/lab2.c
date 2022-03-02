@@ -158,7 +158,8 @@ int main()
 	  }
 	}
       }
-      if ((int)send0 == 177) ramclear(); 
+      if ((int)send0 == 177) { write(sockfd, sendram, 2*MAX_COL); ramclear();} 
+			      
       if (packet.keycode[0] == 0x29) { /* ESC pressed? */
 	      break;
       }

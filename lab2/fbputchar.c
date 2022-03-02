@@ -116,15 +116,14 @@ int fbputswrap(const char *s, int row, int col, int maxrow, int maxcol)
   char c = *s;
   int roww = row, colw = col;
 
-  while ((c != 0) && (roww < maxrow) && (c != '\r'))
+  while ((c = *s++) != 0) && (roww < maxrow))
   {	  
-    while (colw < maxcol) {
-    printf("%d", (int)c);
-    fbputchar(c, roww, colw++);
-    c = *++s;
-  }
-  roww++;
-  colw = 0;
+    if (colw < maxcol) {
+      printf("%d", (int)c);
+      fbputchar(c, roww, colw++);
+    }
+    roww++;
+    colw = 0;
   }
   return roww;
 }

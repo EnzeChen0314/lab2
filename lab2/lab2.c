@@ -21,9 +21,7 @@
 /* arthur.cs.columbia.edu */
 #define SERVER_HOST "128.59.19.114"
 #define SERVER_PORT 42000
-
 #define BUFFER_SIZE 128
-
 #define MAX_COL 64
 #define MAX_ROW_R 20
 #define MAX_ROW_S 23
@@ -46,7 +44,6 @@ void *network_thread_f(void *);
 
 void initial();
 void memRclear();
-//void memSclear();
 void gonext();
 void golast();
 void cursorshow();
@@ -114,7 +111,7 @@ int main()
   char send0, send1;
   int pos = 0;
   int nxtready0 = 1;
-  //int nxtready1 = 1;
+  int nxtready1 = 1;
   for (;;) {
     libusb_interrupt_transfer(keyboard, endpoint_address, (unsigned char *) &packet, sizeof(packet), &transferred, 0);
     if (transferred == sizeof(packet)) {
@@ -124,7 +121,7 @@ int main()
       send0 = keystateconvert(packet.modifiers, packet.keycode[0]);
       send1 = keystateconvert(packet.modifiers, packet.keycode[1]);
       if ((int)send0 == 178) nxtready0 = 1;
-      //if ((int)send1 == 178) nxtready1 = 1;   
+      if ((int)send1 == 178) nxtready1 = 1;   
       if (!sendfull) {
 	  if (nxtready0){
 	    if ((int)send1 == 178) {     
@@ -148,7 +145,7 @@ int main()
       	      }
 	    }   
 	  }
-        //if (nxtready1){
+        if (nxtready1){
 	  if ((int)send1 != 177) {
 	    if ((int)send1 != 178) {
 	      if ((int)send1 != 180) {
@@ -158,7 +155,7 @@ int main()
 	  	    sendram[pos] = send1;
 	            pos1++;
 	            gonext();
-		    //nxtready1 = 0;
+		    nxtready1 = 0;
 		    }
 		  else del();
 	        }
@@ -167,7 +164,7 @@ int main()
 	      else golast();
 	    }
 	  }
-        //}
+        }
       }
       else {
       if ((int)send0 == 179) {sendfull = 0; del();}
@@ -239,15 +236,6 @@ void memRclear()
   }
   receivefull = 0;
 }
-
-/*void memSclear()
-{
-  for (int col = 0 ; col < MAX_COL ; col++) {
-    for (int row = MAX_ROW_R+1 ; row < MAX_ROW_S ; row++) fbputchar(' ', row, col);
-  }
-  cursor1 = MAX_ROW_R + 1; cursor2 = 0;
-  cursorshow();
-}*/
 
 void ramclear()
 {

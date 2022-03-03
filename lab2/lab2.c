@@ -112,8 +112,9 @@ int main()
 
   /* Look for and handle keypresses */
   char send0, send1;
-	int pos = 0;
-	int nxtready = 1;
+  int pos = 0;
+  int nxtready0 = 1;
+  int nxtready1 = 1;
   for (;;) {
     libusb_interrupt_transfer(keyboard, endpoint_address, (unsigned char *) &packet, sizeof(packet), &transferred, 0);
     if (transferred == sizeof(packet)) {
@@ -122,9 +123,10 @@ int main()
       
       send0 = keystateconvert(packet.modifiers, packet.keycode[0]);
       send1 = keystateconvert(packet.modifiers, packet.keycode[1]);
-      if ((int)send0 == 178) nxtready = 1;
+      if ((int)send0 == 178) nxtready0 = 1;
+      if ((int)send1 == 178) nxtready1 = 1;   
       if (!sendfull) {
-	  if (nxtready){
+	  if (nxtready0){
 	    if ((int)send1 == 178) {     
               if ((int)send0 != 177) {
                 if ((int)send0 != 178) {
@@ -134,9 +136,8 @@ int main()
 	                pos = cursor2ram(cursor1, cursor2);	
 		        sendram[pos] = send0;
 			pos1++;
-						//fbputchar(send0, cursor1, cursor2);
 	                gonext();
-			nxtready = 0;
+			nxtready0 = 0;
 		      }
 		      else del();
 	            }
@@ -147,25 +148,26 @@ int main()
       	      }
 	    }   
 	  }
-        
-	if ((int)send1 != 177) {
-	  if ((int)send1 != 178) {
-	    if ((int)send1 != 180) {
-	      if ((int)send1 != 181) {
-	        if ((int)send1 != 179) {
-		  pos = cursor2ram();
-		  sendram[pos] = send1;
-	          pos1++;
-	          //fbputchar(send1, cursor1, cursor2);
-	          gonext();
-		  }
-		else del();
+        if (nxtready1){
+	  if ((int)send1 != 177) {
+	    if ((int)send1 != 178) {
+	      if ((int)send1 != 180) {
+	        if ((int)send1 != 181) {
+	          if ((int)send1 != 179) {
+	  	    pos = cursor2ram();
+	  	    sendram[pos] = send1;
+	            pos1++;
+	            gonext();
+		    nxtready1 = 0;
+		    }
+		  else del();
+	        }
+	        else gonext();
 	      }
-	      else gonext();
+	      else golast();
 	    }
-	    else golast();
 	  }
-	}
+        }
       }
       else {
       if ((int)send0 == 179) {sendfull = 0; del();}

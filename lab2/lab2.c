@@ -108,6 +108,7 @@ int main()
   pthread_create(&network_thread, NULL, network_thread_f, NULL);
 
   /* Look for and handle keypresses */
+  //initialize variables
   char send0, send1;
   int pos = 0;
   int nxtready0 = 1;
@@ -118,10 +119,17 @@ int main()
       sprintf(keystate, "%02x %02x %02x", packet.modifiers, packet.keycode[0], packet.keycode[1]);
       printf("%s\n", keystate);
       
+      //send0 stores the first key and send1 stores the second key
       send0 = keystateconvert(packet.modifiers, packet.keycode[0]);
       send1 = keystateconvert(packet.modifiers, packet.keycode[1]);
+ 
+      //Reset ready indicator after releasing the key
+      //178 is set to be "no input"
       if ((int)send0 == 178) nxtready0 = 1;
-      if ((int)send1 == 178) nxtready1 = 1;   
+      if ((int)send1 == 178) nxtready1 = 1; 
+	    
+      //Execute key press
+      //functional inputs are from 178 to 181 (e.g. enter, backspace)
       if (!sendfull) {
 	  if (nxtready0){
 	    if ((int)send1 == 178) {     
@@ -167,13 +175,15 @@ int main()
         }
       }
       else {
+      //in case the text section is full, still execute Backspace and Left Arrow normally
       if ((int)send0 == 179) {sendfull = 0; del();}
       if ((int)send0 == 180) {sendfull = 0; golast();}
       }
-	    
+      
+      //if Enter is pressed, send out message
       if ((int)send0 == 177) { write(sockfd, sendram, pos1); pos1 = 0; ramclear();} 
       
-			      
+		      
       if (packet.keycode[0] == 0x29) { /* ESC pressed? */
 	      break;
       }
@@ -199,6 +209,8 @@ void *network_thread_f(void *ignore)
   while ( (n = read(sockfd, &recvBuf, BUFFER_SIZE - 1)) > 0 ) {
     recvBuf[n] = '\0';
     printf("%s", recvBuf);
+	  
+    //clear screen once message section is full
     if (!receivefull) {
       if (rowr >= MAX_ROW_R - 1) receivefull = 1;
     }	
@@ -206,6 +218,8 @@ void *network_thread_f(void *ignore)
       rowr = 1;
       memRclear();
     }
+
+    //show received message
     rowr = fbputswrap(recvBuf, rowr, 0, MAX_ROW_R, MAX_COL);
     for (int i = 0; i < n; i++) recvBuf[i] = ' ';
     rowr++;

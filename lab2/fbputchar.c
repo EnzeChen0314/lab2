@@ -83,7 +83,7 @@ void fbputchar(char c, int row, int col)
       }
       pixel += 4;
       if (pixels & mask) {
-	      pixel[0] = 255; /* Red */
+	pixel[0] = 255; /* Red */
         pixel[1] = 255; /* Green */
         pixel[2] = 255; /* Blue */
         pixel[3] = 0;
@@ -137,6 +137,7 @@ od --address-radix=n --width=16 -v -t x1 -j 4 -N 2048 lat0-16.psfu
 
 */
 
+//Keyboard input translater
 char keystateconvert(int modifier, int key)
 {
   int offset = 0;

@@ -145,7 +145,6 @@ char keystateconvert(int modifier, int key)
 
   //Special/Functional inputs - ignoring SHIFT
   //no input - when no key is pressed or pressing unused keys
-//(key >= 0x3a && key <= 0x43) 
   if (key == 0x00 || key == 0x39 || key == 0x2b || key == 0x53 
       || key == 0x48 || key == 0x4c || key == 0x51 || key == 0x52 || (key >= 0x3a && key <= 0x43) ){
     outputInt = 178;
@@ -264,11 +263,12 @@ char keystateconvert(int modifier, int key)
       //closing bracket
       } else if (key == 0x30){
           offset = 45;
-      //all letters
+      //all lowercase letters
       } else if (key >= 0x04 && key <= 0x1d){
           offset = 93;
       }
   }
+  //Convert to ASCII letters
   outputInt = key + offset;
   outputChar = (char)outputInt;
   return outputChar;

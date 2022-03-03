@@ -145,7 +145,6 @@ char keystateconvert(int modifier, int key)
 
   //Special/Functional inputs - ignoring SHIFT
   //no input - when no key is pressed or pressing unused keys
-  //Working in progress: F keys and up down arrow
   if (key == 0x00 || key == 0x39 || key == 0x3d || key >= 0x3a || key <= 0x43 ||
      key == 0x53 || key == 0x48 || key == 0x4c || key == 0x51 || key == 0x52){
     outputInt = 178;

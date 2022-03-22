@@ -48,7 +48,7 @@ static vga_ball_color_t hardware_position(uint hor, uint ver)
    
    position.var1 = (horhw & (unsigned char)255);
    position.var2 = (((horhw >> 8) & (unsigned char)7) | ((verhw << 3) & (unsigned char)248));
-   position.var3 = ((verhw >> 5) & (unsigned char)63);
+   position.var3 = (unsigned char)((verhw >> 5) & (unsigned char)63);
    
    
    return position;
@@ -80,8 +80,41 @@ int main()
 {
   vga_ball_arg_t vla;
   int i;
+	
   uint hor = 200;
   uint ver = 300;
+  
+  uint hormax = 1280-32;
+  uint vermax = 480-32;
+	
+  int directx = 1;
+  int directy = 1;
+	
+  while(1){
+	if (directx = 1){
+		hor = hor + 1;
+	} else {
+		hor = hor - 1;
+	}
+	if (directy = 1){
+		ver = ver + 1;
+	} else {
+		ver = ver - 1;
+	}
+	
+	if (hor >= hormax ){
+		directx = 0;
+	} else if (hor <= 32) {
+		directx = 1;
+	}
+	if (ver >= vermax ){
+		directx = 0;
+	} else if (hor <= 32) {
+		directx = 1;
+	} 
+	  
+  }
+
 	
   static const char filename[] = "/dev/vga_ball";
 

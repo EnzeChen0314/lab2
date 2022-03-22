@@ -134,13 +134,13 @@ int main()
     }
     if (ver >= vermax ){
      	directy = 0;
-    } else if (hor <= 16) {
+    } else if (ver <= 16) {
 	directy = 1;
     } 
     set_position(hor, ver);
     printf("%d %d\n", hor, ver);
     //print_position();
-    usleep(50000);
+    usleep(25000);
     //i++;
   }
   

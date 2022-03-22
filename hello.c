@@ -138,7 +138,7 @@ int main()
 	directx = 1;
     } 
     set_position(hor, ver);
-    printf("%d %d\n", hor, ver)
+    printf("%d %d\n", hor, ver);
     //print_position();
     usleep(50000);
     //i++;

@@ -79,7 +79,7 @@ void set_position(uint hor, uint ver)
 int main()
 {
   vga_ball_arg_t vla;
-  int i = 0;
+  int i = 7;
 	
   uint hor = 200;
   uint ver = 300;
@@ -141,7 +141,7 @@ int main()
     set_position(hor, ver);
     print_position();
     usleep(400000);
-    i++;
+    //i++;
   }
   
   printf("VGA BALL Userspace program terminating\n");

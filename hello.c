@@ -80,8 +80,8 @@ int main()
 {
   vga_ball_arg_t vla;
   int i;
-  uint hor = 200;
-  uint ver = 300;
+ // uint hor = 200;
+  //uint ver = 300;
 	
   static const char filename[] = "/dev/vga_ball";
 
@@ -112,8 +112,8 @@ int main()
   for (i = 0 ; i < 24 ; i++) {
     set_background_color(&colors[i % COLORS ]);
     print_background_color();
-    set_position(hor, ver);
-    print_position();
+    //set_position(hor, ver);
+    //print_position();
     usleep(400000);
   }
   

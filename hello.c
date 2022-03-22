@@ -117,12 +117,12 @@ int main()
   while(1) {
     set_background_color(&colors[i % COLORS ]);
     //print_background_color();
-    if (directx = 1){
+    if (directx == 1){
 	hor = hor + 1;
     } else {
 	hor = hor - 1;
     }
-    if (directy = 1){
+    if (directy == 1){
 	ver = ver + 1;
     } else {
 	ver = ver - 1;

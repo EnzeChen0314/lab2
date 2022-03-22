@@ -50,6 +50,8 @@ static vga_ball_color_t hardware_position(uint hor, uint ver)
    position.var2 = (((horhw >> 8) & (unsigned char)7) | ((verhw << 3) & (unsigned char)248));
    position.var3 = (unsigned char)((verhw >> 5) & (unsigned char)63);
    
+   printf("%02x %02x %02x\n",
+	 position.var3, position.var2, position.var1);
    
    return position;
 }
@@ -58,11 +60,11 @@ void print_position() {
   vga_ball_arg_t vla;
   
   if (ioctl(vga_ball_fd, VGA_BALL_READ_BALL, &vla)) {
-      perror("ioctl(VGA_BALL_READ_BACKGROUND) failed");
+      perror("ioctl(VGA_BALL_READ_BALL) failed");
       return;
   }
-  printf("%02x %02x %02x\n",
-	 vla.background.var3, vla.background.var2, vla.background.var1);
+//  printf("%02x %02x %02x\n",
+	 //vla.background.var3, vla.background.var2, vla.background.var1);
 }
 
 void set_position(uint hor, uint ver)
@@ -70,7 +72,7 @@ void set_position(uint hor, uint ver)
   vga_ball_arg_t vla;
   vla.background = hardware_position(hor, ver);
   if (ioctl(vga_ball_fd, VGA_BALL_WRITE_BALL, &vla)) {
-      perror("ioctl(VGA_BALL_SET_BACKGROUND) failed");
+      perror("ioctl(VGA_BALL_WRITE_BALL) failed");
       return;
   }
 }

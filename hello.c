@@ -94,10 +94,9 @@ int main()
     { 0xff, 0x00, 0xff }, /* Magenta */
     { 0x80, 0x80, 0x80 }, /* Gray */
     { 0x00, 0x00, 0x00 }, /* Black */
-    { 0xff, 0xff, 0xff }  /* White */
   };
 
-# define COLORS 9
+# define COLORS 8
 
   printf("VGA ball Userspace program started\n");
 

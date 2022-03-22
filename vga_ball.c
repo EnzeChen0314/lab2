@@ -59,15 +59,20 @@ struct vga_ball_dev {
  */
 static void write_background(vga_ball_color_t *background)
 {
-	iowrite8(background->red, BG_RED(dev.virtbase) );
-	iowrite8(background->green, BG_GREEN(dev.virtbase) );
-	iowrite8(background->blue, BG_BLUE(dev.virtbase) );
+	iowrite8(background->var1, BG_RED(dev.virtbase) );
+	iowrite8(background->var2, BG_GREEN(dev.virtbase) );
+	iowrite8(background->var3, BG_BLUE(dev.virtbase) );
 	dev.background = *background;
 }
 
-static 
 
-
+static void write_position(vga_ball_color_t *position)
+{
+	iowrite8(background->var1, POS1(dev.virtbase) );
+	iowrite8(background->var2, POS2(dev.virtbase) );
+	iowrite8(background->var3, POS3(dev.virtbase) );
+	dev.background = *background;
+} 
 
 /*
  * Handle ioctl() calls from userspace:

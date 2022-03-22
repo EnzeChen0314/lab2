@@ -39,6 +39,10 @@
 #define BG_RED(x) (x)
 #define BG_GREEN(x) ((x)+1)
 #define BG_BLUE(x) ((x)+2)
+#define POS1(x) ((x)+3)
+#define POS2(x) ((x)+4)
+#define POS3(x) ((x)+5)
+
 
 /*
  * Information about our device
@@ -60,6 +64,10 @@ static void write_background(vga_ball_color_t *background)
 	iowrite8(background->blue, BG_BLUE(dev.virtbase) );
 	dev.background = *background;
 }
+
+static 
+
+
 
 /*
  * Handle ioctl() calls from userspace:

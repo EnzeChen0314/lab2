@@ -25,8 +25,8 @@ void print_background_color() {
       perror("ioctl(VGA_BALL_READ_BACKGROUND) failed");
       return;
   }
-  printf("%02x %02x %02x\n",
-	 vla.background.var1, vla.background.var2, vla.background.var3);
+//  printf("%02x %02x %02x\n",
+	// vla.background.var1, vla.background.var2, vla.background.var3);
 }
 
 /* Set the background color */
@@ -116,7 +116,7 @@ int main()
 
   while(1) {
     set_background_color(&colors[i % COLORS ]);
-    print_background_color();
+    //print_background_color();
     if (directx = 1){
 	hor = hor + 1;
     } else {
@@ -138,7 +138,8 @@ int main()
 	directx = 1;
     } 
     set_position(hor, ver);
-    print_position();
+    printf("%d %d\n", hor, ver)
+    //print_position();
     usleep(50000);
     //i++;
   }

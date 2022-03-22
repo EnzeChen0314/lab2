@@ -57,7 +57,7 @@ static vga_ball_color_t hardware_position(uint hor, uint ver)
 void print_position() {
   vga_ball_arg_t vla;
   
-  if (ioctl(vga_ball_fd, VGA_BALL_READ_BACKGROUND, &vla)) {
+  if (ioctl(vga_ball_fd, VGA_BALL_READ_BALL, &vla)) {
       perror("ioctl(VGA_BALL_READ_BACKGROUND) failed");
       return;
   }
@@ -69,7 +69,7 @@ void set_position(uint hor, uint ver)
 {
   vga_ball_arg_t vla;
   vla.background = hardware_position(hor, ver);
-  if (ioctl(vga_ball_fd, VGA_BALL_WRITE_BACKGROUND, &vla)) {
+  if (ioctl(vga_ball_fd, VGA_BALL_WRITE_BALL, &vla)) {
       perror("ioctl(VGA_BALL_SET_BACKGROUND) failed");
       return;
   }

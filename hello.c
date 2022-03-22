@@ -117,7 +117,7 @@ int main()
   while(1) {
     set_background_color(&colors[i % COLORS ]);
     print_background_color();
-    /*if (directx = 1){
+    if (directx = 1){
 	hor = hor + 1;
     } else {
 	hor = hor - 1;
@@ -136,10 +136,10 @@ int main()
      	directx = 0;
     } else if (hor <= 16) {
 	directx = 1;
-    } */
+    } 
     set_position(hor, ver);
     print_position();
-    usleep(400000);
+    usleep(100000);
     //i++;
   }
   

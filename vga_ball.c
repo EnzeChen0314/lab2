@@ -69,9 +69,9 @@ static void write_background(vga_ball_color_t *background)
 
 static void write_position(vga_ball_color_t *position)
 {
-	iowrite8(background->var1, POS1(dev.virtbase) );
-	iowrite8(background->var2, POS2(dev.virtbase) );
-	iowrite8(background->var3, POS3(dev.virtbase) );
+	iowrite8(position->var1, POS1(dev.virtbase) );
+	iowrite8(position->var2, POS2(dev.virtbase) );
+	iowrite8(position->var3, POS3(dev.virtbase) );
 	dev.position = *position;
 } 
 
@@ -98,6 +98,20 @@ static long vga_ball_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 				 sizeof(vga_ball_arg_t)))
 			return -EACCES;
 		break;
+	case VGA_BALL_WRITE_BALL:
+		if (copy_from_user(&vla, (vga_ball_arg_t *) arg,
+				   sizeof(vga_ball_arg_t)))
+			return -EACCES;
+		write_position(&vla.background);
+		break;
+
+	case VGA_BALL_READ_BALL:
+	  	vla.background = dev.position;
+		if (copy_to_user((vga_ball_arg_t *) arg, &vla,
+				 sizeof(vga_ball_arg_t)))
+			return -EACCES;
+		break;
+
 
 	default:
 		return -EINVAL;

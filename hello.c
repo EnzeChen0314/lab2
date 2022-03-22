@@ -83,39 +83,13 @@ int main()
 	
   uint hor = 200;
   uint ver = 300;
-  /*
+  
   uint hormax = 1280-32;
   uint vermax = 480-32;
 	
   int directx = 1;
   int directy = 1;
-	
-  while(1){
-	if (directx = 1){
-		hor = hor + 1;
-	} else {
-		hor = hor - 1;
-	}
-	if (directy = 1){
-		ver = ver + 1;
-	} else {
-		ver = ver - 1;
-	}
-	
-	if (hor >= hormax ){
-		directx = 0;
-	} else if (hor <= 32) {
-		directx = 1;
-	}
-	if (ver >= vermax ){
-		directx = 0;
-	} else if (hor <= 32) {
-		directx = 1;
-	} 
-	  
-  }
 
-	*/
   static const char filename[] = "/dev/vga_ball";
 
   static const vga_ball_color_t colors[] = {
@@ -141,9 +115,29 @@ int main()
   printf("initial state: ");
   print_background_color();
 
-  for (i = 0 ; i < 24 ; i++) {
+  while(1) {
     set_background_color(&colors[i % COLORS ]);
     print_background_color();
+    if (directx = 1){
+	hor = hor + 1;
+    } else {
+	hor = hor - 1;
+    }
+    if (directy = 1){
+	ver = ver + 1;
+    } else {
+	ver = ver - 1;
+    }
+    if (hor >= hormax ){
+	directx = 0;
+    } else if (hor <= 32) {
+	directx = 1;
+    }
+    if (ver >= vermax ){
+     	directx = 0;
+    } else if (hor <= 32) {
+	directx = 1;
+    } 
     set_position(hor, ver);
     print_position();
     usleep(400000);

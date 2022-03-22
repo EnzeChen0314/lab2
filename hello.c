@@ -84,8 +84,8 @@ int main()
   uint hor = 200;
   uint ver = 300;
   
-  uint hormax = 1280-64;
-  uint vermax = 480-64;
+  uint hormax = 1280-16;
+  uint vermax = 480-16;
 	
   int directx = 1;
   int directy = 1;
@@ -130,12 +130,12 @@ int main()
     }
     if (hor >= hormax ){
 	directx = 0;
-    } else if (hor <= 64) {
+    } else if (hor <= 16) {
 	directx = 1;
     }
     if (ver >= vermax ){
      	directx = 0;
-    } else if (hor <= 64) {
+    } else if (hor <= 16) {
 	directx = 1;
     } 
     set_position(hor, ver);

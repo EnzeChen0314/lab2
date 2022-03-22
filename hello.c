@@ -83,7 +83,7 @@ int main()
   uint hor = 200;
   uint ver = 300;
   
-  uint hormax = 1280-16;
+  uint hormax = 1280-32;
   uint vermax = 480-16;
 	
   int directx = 1;
@@ -129,7 +129,7 @@ int main()
     }
     if (hor >= hormax ){
 	directx = 0;
-    } else if (hor <= 16) {
+    } else if (hor <= 32) {
 	directx = 1;
     }
     if (ver >= vermax ){
@@ -140,8 +140,8 @@ int main()
     set_position(hor, ver);
     printf("%d %d\n", hor, ver);
     //print_position();
-    usleep(25000);
-    //i++;
+    usleep(15000);
+    i++;
   }
   
   printf("VGA BALL Userspace program terminating\n");

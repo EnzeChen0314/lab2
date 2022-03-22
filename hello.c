@@ -142,7 +142,7 @@ int main()
     } */
     set_position(hor, ver);
     print_position();
-    usleep(20000);
+    usleep(400000);
     //i++;
   }
   

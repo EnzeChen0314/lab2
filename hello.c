@@ -83,7 +83,7 @@ int main()
 	
   uint hor = 200;
   uint ver = 300;
-  
+  /*
   uint hormax = 1280-32;
   uint vermax = 480-32;
 	
@@ -115,7 +115,7 @@ int main()
 	  
   }
 
-	
+	*/
   static const char filename[] = "/dev/vga_ball";
 
   static const vga_ball_color_t colors[] = {

@@ -40,10 +40,28 @@ void set_background_color(const vga_ball_color_t *c)
   }
 }
 
+static vga_ball_color_t hardware_position(uint hor, uint ver)
+{
+   vga_ball_color_t position;
+   unsigned char horhw = (unsigned char) hor;
+   unsigned char verhw = (unsigned char) ver;
+   
+   for (int i = 0; i < 8; i++) position.var1[i] = horhw[i];
+   for (int i = 0; i < 2; i++) position.var1[i] = horhw[i+8];
+   for (int i = 0; i < 6; i++) position.var2[i+2] = verhw[i];
+   for (int i = 0; i < 4; i++) position.var2[i] = verhw[i+6];
+   
+   return position;
+}
+
+
 int main()
 {
   vga_ball_arg_t vla;
   int i;
+  int hor = 320;
+  int ver = 240;
+	
   static const char filename[] = "/dev/vga_ball";
 
   static const vga_ball_color_t colors[] = {

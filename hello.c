@@ -45,7 +45,7 @@ static vga_ball_color_t hardware_position(uint hor, uint ver)
    vga_ball_color_t position;
    position.var1 = (unsigned char)(hor & 255);
    position.var2 = (unsigned char)(((hor >> 8) & 7) | ((ver << 3) & 248));
-   position.var3 = (unsigned char)((ver >> 8) & 63);
+   position.var3 = (unsigned char)((ver >> 5) & 63);
    	
    printf("%02x %02x %02x\n",
 	 position.var1, position.var2, position.var3);

@@ -26,7 +26,7 @@ void print_background_color() {
       return;
   }
   printf("%02x %02x %02x\n",
-	 vla.background.red, vla.background.green, vla.background.blue);
+	 vla.background.var1, vla.background.var2, vla.background.var3);
 }
 
 /* Set the background color */
@@ -52,6 +52,27 @@ static vga_ball_color_t hardware_position(uint hor, uint ver)
    for (int i = 0; i < 4; i++) position.var2[i] = verhw[i+6];
    
    return position;
+}
+
+void print_position() {
+  vga_ball_arg_t vla;
+  
+  if (ioctl(vga_ball_fd, VGA_BALL_READ_BACKGROUND, &vla)) {
+      perror("ioctl(VGA_BALL_READ_BACKGROUND) failed");
+      return;
+  }
+  printf("%02x %02x %02x\n",
+	 vla.background.var1, vla.background.var2, vla.background.var3);
+}
+
+void set_position(uint hor, uint ver)
+{
+  vga_ball_arg_t vla;
+  vla.background = hardware_position(hor, ver);
+  if (ioctl(vga_ball_fd, VGA_BALL_WRITE_BACKGROUND, &vla)) {
+      perror("ioctl(VGA_BALL_SET_BACKGROUND) failed");
+      return;
+  }
 }
 
 

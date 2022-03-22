@@ -46,10 +46,10 @@ static vga_ball_color_t hardware_position(uint hor, uint ver)
    unsigned char horhw = (unsigned char) hor;
    unsigned char verhw = (unsigned char) ver;
    
-   for (int i = 0; i < 8; i++) position.var1[i] = horhw[i];
-   for (int i = 0; i < 2; i++) position.var1[i] = horhw[i+8];
-   for (int i = 0; i < 6; i++) position.var2[i+2] = verhw[i];
-   for (int i = 0; i < 4; i++) position.var2[i] = verhw[i+6];
+   position.var1 = (horhw & (unsigned char)255);
+   position.var2 = (((horhw >> 8) & 3) | ((verhw << 2) & (unsigned char)252));
+   position.var3 = ((verhw >> 6) & (unsigned char)15)
+   
    
    return position;
 }

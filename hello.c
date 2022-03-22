@@ -110,8 +110,8 @@ int main()
   print_background_color();
 
   for (i = 0 ; i < 24 ; i++) {
-    //set_background_color(&colors[i % COLORS ]);
-    //print_background_color();
+    set_background_color(&colors[i % COLORS ]);
+    print_background_color();
     set_position(hor, ver);
     print_position();
     usleep(400000);

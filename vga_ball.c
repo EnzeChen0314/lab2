@@ -51,6 +51,7 @@ struct vga_ball_dev {
 	struct resource res; /* Resource: our registers */
 	void __iomem *virtbase; /* Where registers can be accessed in memory */
         vga_ball_color_t background;
+	vga_ball_color_t position;
 } dev;
 
 /*
@@ -71,7 +72,7 @@ static void write_position(vga_ball_color_t *position)
 	iowrite8(background->var1, POS1(dev.virtbase) );
 	iowrite8(background->var2, POS2(dev.virtbase) );
 	iowrite8(background->var3, POS3(dev.virtbase) );
-	dev.background = *background;
+	dev.position = *position;
 } 
 
 /*

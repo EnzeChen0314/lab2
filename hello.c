@@ -119,14 +119,14 @@ int main()
     set_background_color(&colors[i % COLORS ]);
     print_background_color();
     if (directx = 1){
-	hor = hor + 3;
+	hor = hor + 8;
     } else {
-	hor = hor - 3;
+	hor = hor - 8;
     }
     if (directy = 1){
-	ver = ver + 3;
+	ver = ver + 8;
     } else {
-	ver = ver - 3;
+	ver = ver - 8;
     }
     if (hor >= hormax ){
 	directx = 0;

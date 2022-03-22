@@ -79,7 +79,7 @@ void set_position(uint hor, uint ver)
 int main()
 {
   vga_ball_arg_t vla;
-  int i;
+  int i = 0;
 	
   uint hor = 200;
   uint ver = 300;
@@ -119,14 +119,14 @@ int main()
     set_background_color(&colors[i % COLORS ]);
     print_background_color();
     if (directx = 1){
-	hor = hor + 1;
+	hor = hor + 3;
     } else {
-	hor = hor - 1;
+	hor = hor - 3;
     }
     if (directy = 1){
-	ver = ver + 1;
+	ver = ver + 3;
     } else {
-	ver = ver - 1;
+	ver = ver - 3;
     }
     if (hor >= hormax ){
 	directx = 0;
@@ -141,6 +141,7 @@ int main()
     set_position(hor, ver);
     print_position();
     usleep(400000);
+    i++;
   }
   
   printf("VGA BALL Userspace program terminating\n");

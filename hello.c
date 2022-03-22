@@ -119,14 +119,14 @@ int main()
     set_background_color(&colors[i % COLORS ]);
     print_background_color();
     if (directx = 1){
-	hor = hor + 8;
+	hor = hor + 1;
     } else {
-	hor = hor - 8;
+	hor = hor - 1;
     }
     if (directy = 1){
-	ver = ver + 8;
+	ver = ver + 1;
     } else {
-	ver = ver - 8;
+	ver = ver - 1;
     }
     if (hor >= hormax ){
 	directx = 0;
@@ -140,7 +140,7 @@ int main()
     } 
     set_position(hor, ver);
     print_position();
-    usleep(400000);
+    usleep(8000);
     //i++;
   }
   

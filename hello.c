@@ -43,11 +43,9 @@ void set_background_color(const vga_ball_color_t *c)
 static vga_ball_color_t hardware_position(uint hor, uint ver)
 {
    vga_ball_color_t position;
-   unsigned long char horhw = (unsigned char) hor;
-   unsigned long char verhw = (unsigned char) ver;
-   position.var1 = (horhw & (unsigned char)255);
-   position.var2 = (((horhw >> 8) & (unsigned char)7) | ((verhw << 3) & (unsigned char)248));
-   position.var3 = ((verhw >> 8) & (unsigned char)63);
+   position.var1 = (unsigned char)(horhw & 255);
+   position.var2 = (unsigned char)(((horhw >> 8) & 7) | ((verhw << 3) & 248));
+   position.var3 = (unsigned char)((verhw >> 8) & 63);
    	
    printf("%02x %02x %02x\n",
 	 position.var1, position.var2, position.var3);

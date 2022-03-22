@@ -133,9 +133,9 @@ int main()
 	directx = 1;
     }
     if (ver >= vermax ){
-     	directx = 0;
+     	directy = 0;
     } else if (hor <= 16) {
-	directx = 1;
+	directy = 1;
     } 
     set_position(hor, ver);
     printf("%d %d\n", hor, ver);

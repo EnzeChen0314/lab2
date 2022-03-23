@@ -129,19 +129,22 @@ int main()
     }
     if (hor >= hormax ){
 	directx = 0;
+	i++;
     } else if (hor <= 32) {
 	directx = 1;
+	i++;
     }
     if (ver >= vermax ){
      	directy = 0;
+	i++;
     } else if (ver <= 16) {
 	directy = 1;
+	i++;
     } 
     set_position(hor, ver);
     printf("%d %d\n", hor, ver);
     //print_position();
     usleep(15000);
-    i++;
   }
   
   printf("VGA BALL Userspace program terminating\n");

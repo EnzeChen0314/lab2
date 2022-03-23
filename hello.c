@@ -129,9 +129,9 @@ int main()
     //set_background_color(&colors[i % COLORS ]);
     //print_background_color();
     if (directx == 1){
-	hor = hor + 1;
+	hor = hor + 2;
     } else {
-	hor = hor - 1;
+	hor = hor - 2;
     }
     if (directy == 1){
 	ver = ver + 1;

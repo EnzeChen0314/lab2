@@ -14,6 +14,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 int vga_ball_fd;
 
@@ -78,10 +79,10 @@ void set_position(uint hor, uint ver)
 int main()
 {
   vga_ball_arg_t vla;
-  int i = 7;
+  int i = 0;
 	
-  uint hor = 200;
-  uint ver = 300;
+  uint hor = 640;
+  uint ver = 240;
   
   uint hormax = 1280-32;
   uint vermax = 480-16;
@@ -115,7 +116,17 @@ int main()
   print_background_color();
 
   while(1) {
-    set_background_color(&colors[i % COLORS ]);
+    
+    if (i % 10 == 0) 
+    {
+       int r = rand();
+       int g = rand();
+       int b = rand();
+       vga_ball_color_t newcolor = {(unsigned char)r, (unsigned char)g, (unsigned char)b};
+       set_background_color(&newcolor);
+    }
+    i++;
+    //set_background_color(&colors[i % COLORS ]);
     //print_background_color();
     if (directx == 1){
 	hor = hor + 1;
@@ -129,24 +140,23 @@ int main()
     }
     if (hor >= hormax ){
 	directx = 0;
-	i++;
+	//i++;
     } else if (hor <= 32) {
 	directx = 1;
-	i++;
+	//i++;
     }
     if (ver >= vermax ){
      	directy = 0;
-	i++;
+	//i++;
     } else if (ver <= 16) {
 	directy = 1;
-	i++;
+	//i++;
     } 
     set_position(hor, ver);
     printf("%d %d\n", hor, ver);
     //print_position();
-    usleep(10000);
+    usleep(8000);
   }
-  
   printf("VGA BALL Userspace program terminating\n");
   return 0;
 }

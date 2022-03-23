@@ -117,7 +117,7 @@ int main()
 
   while(1) {
     
-    if (i % 10 == 0) 
+    if (i % 100 == 0) 
     {
        int r = rand();
        int g = rand();
